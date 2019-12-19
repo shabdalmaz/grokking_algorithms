@@ -51,35 +51,29 @@ t_list		*delnode(t_list *list, t_list *node)
 {
 	t_list	*begin;
 	t_list	*prev;
-	t_list	*head;
 
 	begin = list;
 	if (begin == node)
 	{
-		head = begin->next;
 		free(begin);
-		return (head);
+		return (list->next);
 	}
 	while (begin != node && begin != NULL)
 	{
 		prev = begin;
 		begin = begin->next;
 	}
-	if (begin == NULL)
-		return NULL;
-	prev->next = begin->next;
+	if (begin != NULL)
+		prev->next = begin->next;
 	return (list);
 }
 
 t_list		*selection_sort(t_list *list)
 {
 	t_list	*newlist;
-	t_list	*begin;
 	t_list	*smallest;
 
-	begin = list;
 	newlist = NULL;
-
 	while (list)
 	{
 		smallest = find_smallest(list);
