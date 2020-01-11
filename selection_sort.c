@@ -64,7 +64,10 @@ t_list		*delnode(t_list *list, t_list *node)
 		begin = begin->next;
 	}
 	if (begin != NULL)
+	{
 		prev->next = begin->next;
+		free(begin);
+	}
 	return (list);
 }
 
