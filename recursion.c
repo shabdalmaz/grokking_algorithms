@@ -44,12 +44,29 @@ t_list	*newnode(t_list *head, int data)
 	return (node);
 }
 
+int     hcf(int side1, int side2)
+{
+    int     a;
+    int     b;
+    
+    a  = (side1 > side2) ? side1 : side2;
+    b  = (side1 < side2) ? side1 : side2;
+
+    if (a % b == 0)
+        return (b);
+    while (a > b)
+        a -= b;
+    return (hcf(b, a));
+}
+
 int		main(void)
 {
 	int		arr[] = {2, 5, 6};
 	size_t	arr_size = sizeof(arr) / sizeof(arr[0]);
 	int		i = 0;
 	t_list	*head;
+	int		side1 = 1680;
+	int		side2 = 640;
 
 	srand(time(NULL));
 	while (i < 10)
@@ -60,5 +77,6 @@ int		main(void)
 	printf("sum of array - %d\n", sum(arr, arr_size));
 	printf("size of list - %d\n", getsize(head, 0));
 	printf("max of list - %d\n", getmax(head, head->data));
+	printf("The highest common factor of %d and %d is %d\n", side1, side2, hcf(side1, side2));
 	return (0);
 }
