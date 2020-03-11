@@ -39,6 +39,8 @@ int		get_wall(int *arr, int pivot, int last)
 void	quick_sort(int arr[], int low, int high)
 {
 	int		wall;
+
+	wall = 0;
 	if (low < high)
 	{
 		wall = get_wall(arr, low, high);
@@ -52,13 +54,12 @@ int		main(void)
 	int		i = 0;
 	int		arr[SIZE];
 
-	srand(1);
+	srand(time(NULL));
 	while (i < SIZE)
 	{
 		arr[i] = rand() % (SIZE - 1) + 1;
 		i += 1;
 	}
-
 	i = 0;
 	printf("unsorted array:\narr[] = {");
 	while (i < SIZE)
@@ -67,9 +68,7 @@ int		main(void)
 		i += 1;
 	}
 	printf("};\n");
-
 	quick_sort(arr, 0, SIZE - 1);
-	qsort(arr, SIZE, sizeof(int), compare);
 	i = 0;
 	printf("sorted array:\narr[] = {");
 	while (i < SIZE)
@@ -78,6 +77,5 @@ int		main(void)
 		i += 1;
 	}
 	printf("};\n");
-
 	return (0);
 }
