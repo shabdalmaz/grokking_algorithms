@@ -47,11 +47,6 @@ void	quick_sort(int arr[], int low, int high)
 	}
 }
 
-int		compare(const void * x1, const void * x2)
-{
-	return ( *(int*)x1 - *(int*)x2 );
-}
-
 int		main(void)
 {
 	int		i = 0;
