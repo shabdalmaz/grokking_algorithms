@@ -36,7 +36,7 @@ int		get_wall(int *arr, int pivot, int last)
 	return (rightmark);
 }
 
-void	quick_sort(int arr[], int low, int high)
+void	quick_sort(int *arr, int low, int high)
 {
 	int		wall;
 
