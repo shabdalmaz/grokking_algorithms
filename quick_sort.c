@@ -32,8 +32,8 @@ int		get_wall(int *arr, int pivot, int last)
 		else
 			ft_swap(&arr[leftmark], &arr[rightmark]);
 	}
-    ft_swap(&arr[rightmark], &arr[pivot]);
-    return (rightmark);
+	ft_swap(&arr[rightmark], &arr[pivot]);
+	return (rightmark);
 }
 
 void	quick_sort(int arr[], int low, int high)
