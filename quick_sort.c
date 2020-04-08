@@ -1,58 +1,63 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define SIZE 35
+#define SIZE 8
 
-void	ft_swap(int *a, int *b)
+void	print(int *arr)
 {
-	int		tmp;
+	int	i;
+
+	i = 0;
+	while (i < SIZE)
+	{
+		(i < SIZE - 1) ? printf("%d, ", arr[i]) : printf("%d", arr[i]);
+		i += 1;
+	}
+}
+
+void	swapper(int *a, int *b)
+{
+	int	tmp;
 
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
 }
 
-int		get_wall(int *arr, int pivot, int last)
+void	quick_sort(int *arr, int first, int last)
 {
-	int		leftmark;
-	int		rightmark;
-	int		done;
+	int	left;
+	int	right;
+	int	pivot;
 
-	leftmark = pivot + 1;
-	rightmark = last;
-	done = 0;
-	while (!done)
+	left = first;
+	right = last;
+	pivot = arr[(first + last) / 2];
+	
+	while (left <= right)
 	{
-		while (arr[leftmark] <= arr[pivot] && leftmark <= rightmark)
-			leftmark += 1;
-		while (arr[rightmark] >= arr[pivot] && rightmark >= leftmark)
-			rightmark -= 1;
-		if (rightmark < leftmark)
-			done = 1;
-		else
-			ft_swap(&arr[leftmark], &arr[rightmark]);
+		while (arr[left] < pivot)
+			left += 1;
+		while (arr[right] > pivot)
+			right -= 1;
+		if (left <= right)
+		{
+			swapper(&arr[left], &arr[right]);
+			left += 1;
+			right -= 1;
+		}
 	}
-	ft_swap(&arr[rightmark], &arr[pivot]);
-	return (rightmark);
-}
-
-void	quick_sort(int *arr, int low, int high)
-{
-	int		wall;
-
-	wall = 0;
-	if (low < high)
+	if (first < last)
 	{
-		wall = get_wall(arr, low, high);
-		quick_sort(arr, low, wall - 1);
-		quick_sort(arr, wall + 1, high);
+		quick_sort(arr, first, right);
+		quick_sort(arr, left, last);
 	}
 }
 
-int		main(void)
+int	main(void)
 {
-	int		i = 0;
-	int		arr[SIZE];
+	int	i = 0;
+	int	arr[SIZE];
 
 	srand(time(NULL));
 	while (i < SIZE)
@@ -60,22 +65,17 @@ int		main(void)
 		arr[i] = rand() % (SIZE - 1) + 1;
 		i += 1;
 	}
-	i = 0;
+
 	printf("unsorted array:\narr[] = {");
-	while (i < SIZE)
-	{
-		(i < SIZE - 1) ? printf("%d, ", arr[i]) : printf("%d", arr[i]);
-		i += 1;
-	}
+	print(arr);
+	printf("\n");
 	printf("};\n");
+
 	quick_sort(arr, 0, SIZE - 1);
-	i = 0;
+
 	printf("sorted array:\narr[] = {");
-	while (i < SIZE)
-	{
-		(i < SIZE - 1) ? printf("%d, ", arr[i]) : printf("%d", arr[i]);
-		i += 1;
-	}
+	print(arr);
+	printf("\n");
 	printf("};\n");
 	return (0);
 }
