@@ -3,29 +3,32 @@
 #include <stdlib.h>
 #include <time.h>
 
-typedef struct	s_list 
+typedef struct		s_list 
 {
-	int				data;
+	int		data;
 	struct s_list	*next;
-}				t_list;
+}			t_list;
 
 
-int		sum(int *arr, size_t size)
+int	sum(int *arr, size_t size)
 {
 	if (size == 1)
 		return (arr[0]);
 	return (arr[0] + sum(arr + 1, size - 1));
 }
 
-int		getsize(t_list *head, int i)
+int	getsize(t_list *head)
 {
+	int	i;
+
+	i = 0;
 	if (head == NULL)
 		return (i);
 	i += 1;
-	return (getsize(head->next, i));
+	return (i + getsize(head->next));
 }
 
-int		getmax(t_list *head, int first_node)
+int	getmax(t_list *head, int first_node)
 {
 	if (head == NULL)
 		return (first_node);
@@ -59,14 +62,21 @@ int     hcf(int side1, int side2)
     return (hcf(b, a));
 }
 
-int		main(void)
+int	factorial(int n)
 {
-	int		arr[] = {2, 5, 6};
+	if (n == 1)
+		return (n);
+	return (n * factorial(n - 1));
+}
+
+int	main(void)
+{
+	int	arr[] = {2, 5, 6};
 	size_t	arr_size = sizeof(arr) / sizeof(arr[0]);
-	int		i = 0;
-	t_list	*head;
-	int		side1 = 1680;
-	int		side2 = 640;
+	int	i = 0;
+	t_list	*head = NULL;
+	int	side1 = 1680;
+	int	side2 = 640;
 
 	srand(time(NULL));
 	while (i < 10)
@@ -75,8 +85,9 @@ int		main(void)
 		i += 1;
 	}
 	printf("sum of array - %d\n", sum(arr, arr_size));
-	printf("size of list - %d\n", getsize(head, 0));
+	printf("size of list - %d\n", getsize(head));
 	printf("max of list - %d\n", getmax(head, head->data));
-	printf("The highest common factor of %d and %d is %d\n", side1, side2, hcf(side1, side2));
+	printf("the highest common factor of %d and %d is %d\n", side1, side2, hcf(side1, side2));
+	printf("factorial of %d is %d\n", 5, factorial(5));
 	return (0);
 }
