@@ -33,8 +33,7 @@ void	quick_sort(int *arr, int first, int last)
 
 	left = first;
 	right = last;
-	/* pivot_index = (rand() % (last - first + 1)) + first; */
-	pivot_index = (last + first) / 2;
+	pivot_index = (first <= last) ? (rand() % (last - first + 1)) + first : (last + first) / 2;
 	pivot = arr[pivot_index];
 	
 	while (left <= right)
