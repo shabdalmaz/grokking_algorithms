@@ -29,10 +29,13 @@ void	quick_sort(int *arr, int first, int last)
 	int	left;
 	int	right;
 	int	pivot;
+	int	pivot_index;
 
 	left = first;
 	right = last;
-	pivot = arr[(first + last) / 2];
+	/* pivot_index = (rand() % (last - first + 1)) + first; */
+	pivot_index = (last + first) / 2;
+	pivot = arr[pivot_index];
 	
 	while (left <= right)
 	{
@@ -68,14 +71,12 @@ int	main(void)
 
 	printf("unsorted array:\narr[] = {");
 	print(arr);
-	printf("\n");
 	printf("};\n");
 
 	quick_sort(arr, 0, SIZE - 1);
 
 	printf("sorted array:\narr[] = {");
 	print(arr);
-	printf("\n");
 	printf("};\n");
 	return (0);
 }
