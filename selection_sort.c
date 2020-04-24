@@ -4,39 +4,41 @@
 
 #define SIZE 5
 
-typedef struct	n_list {
-	int	num;
-	struct n_list	*next;
-}				t_list;
+typedef struct	s_list 
+{
+	int		num;
+	struct s_list	*next;
+}		t_list;
 
 void		print_list(t_list *list)
 {
 	while (list != NULL)
 	{
-		printf("%d\n", list->num);
+		if (list->next != NULL)
+			printf("%d => ", list->num);
+		else
+			printf("%d\n", list->num);
 		list = list->next;
 	}
 }
 
 t_list		*addnode(t_list *node, int num)
 {
-	t_list	*mem;
-	
-	mem = NULL;
-	if ((mem = (t_list *)malloc(sizeof(t_list))))
+	t_list	*newnode;
+
+	newnode = NULL;
+	if ((newnode = (t_list *)malloc(sizeof(t_list))))
 	{
-		mem->next = node;
-		mem->num = num;
+		newnode->next = node;
+		newnode->num = num;
 	}
-	return (mem);
+	return (newnode);
 }
 
 t_list		*find_smallest(t_list *list)
 {
-	t_list	*begin;
 	t_list	*smallest;
 
-	begin = list;
 	smallest = list;
 	while (list)
 	{
@@ -55,8 +57,9 @@ t_list		*delnode(t_list *list, t_list *node)
 	begin = list;
 	if (begin == node)
 	{
+		list = list->next;
 		free(begin);
-		return (list->next);
+		return (list);
 	}
 	while (begin != node && begin != NULL)
 	{
@@ -88,8 +91,8 @@ t_list		*selection_sort(t_list *list)
 
 int			main(void)
 {
-	t_list *head;
-	int		i;
+	t_list	*head;
+	int	i;
 
 	head = NULL;
 	i = 0;
@@ -102,7 +105,6 @@ int			main(void)
 	}
 	printf("unsorted list:\n");
 	print_list(head);
-	printf("\n");
 	head = selection_sort(head);
 	printf("sorted list:\n");
 	print_list(head);
