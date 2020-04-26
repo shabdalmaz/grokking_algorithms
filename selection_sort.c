@@ -10,6 +10,19 @@ typedef struct	s_list
 	struct s_list	*next;
 }		t_list;
 
+void		free_list(t_list *head)
+{
+	t_list	*tmp;
+
+	tmp = head;
+	while (head)
+	{
+		tmp = head->next;
+		free(head);
+		head = tmp;
+	}
+}
+
 void		print_list(t_list *list)
 {
 	while (list != NULL)
@@ -108,5 +121,6 @@ int			main(void)
 	head = selection_sort(head);
 	printf("sorted list:\n");
 	print_list(head);
+	free_list(head);
 	return (0);
 }
